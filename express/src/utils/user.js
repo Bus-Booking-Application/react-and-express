@@ -4,7 +4,7 @@ const password=()=>
         let password=""
         for(i=0;i<8;i++)
         {
-           password=+character.charAt(Math.floor(Math.random()*chargene.length))
+           password=+chargene.charAt(Math.floor(Math.random()*chargene.length))
         }
         return password
     }
