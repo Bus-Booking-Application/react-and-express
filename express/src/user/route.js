@@ -6,7 +6,10 @@ const controller = require("./controller");
 router
 .route("/registeraccount")
 .post(controller.register);
-// .put()
+
+router
+.route("/loginaccount")
+.post(controller.login)
 
 
 module.exports = router;

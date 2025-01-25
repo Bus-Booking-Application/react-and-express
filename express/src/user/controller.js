@@ -27,7 +27,6 @@ const register = async (req, res) => {
 
 //Login user
 
-module.exports={register};
 const login=()=>{
 try {
     console.log("connected")
@@ -35,4 +34,4 @@ try {
     
 }
 }
-module.exports=login
+module.exports={login,register}
