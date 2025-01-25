@@ -2,6 +2,7 @@ const bcrypt = require("bcrypt");
 const user = require("./register_model");
 const { password } = require("../utils/user");
 const nodemailer = require("nodemailer");
+const tokengeneration = require("../middleware/user");
 
 
 //Register user and send email to user with password  
@@ -25,13 +26,27 @@ const register = async (req, res) => {
     }   
     };
 
-//Login user
+//Login user and generate token for user 
+const login = async (req, res) => {
+    try {
+        const { email, password } = req.body;
+        const checkEmail = await user.findOne({ email });
+        console.log(checkEmail);
+        
+        if (!checkEmail) return res.status(409).json({ message: "Email not Registered.." });
+        const checkPassword = await bcrypt.compare(password, checkEmail.password);
+        if (!checkPassword) return res.status(409).json({ message: "Invalid Password" });
+        const token = generateToken(checkEmail);
+        res.json({ 
+            token:token,
+            message: "Login successful"
+         });
+        } catch (error) {
+            console.log(error);
+            
+            res.json({ Error: error.message });
+        }
+    }
+   
 
-const login=()=>{
-try {
-    console.log("connected")
-} catch (error) {
-    
-}
-}
 module.exports={login,register}
