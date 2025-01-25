@@ -1,39 +1,39 @@
-const mongoose=require("mongoose")
-const {v4}=require("uuid")
+const mongoose = require("mongoose")
+const { v4 } = require("uuid")
 
-const userSchema=new mongoose.Schema({
-    _id:{
-        type:String,
-        default: v4
-       },
-    name:{
+const userSchema = new mongoose.Schema({
+    _id: {
         type: String,
-        require:true
+        default: v4
     },
-    email:{
-        type:String,
-        require:true
+    name: {
+        type: String,
+        require: true
     },
-    password:{
-        type:String,
+    email: {
+        type: String,
+        require: true
     },
-    phone:{
-        type:Number,
-        require:true
+    password: {
+        type: String,
     },
-    sex:{
-        type:String
+    phone: {
+        type: Number,
+        require: true
+    },
+    sex: {
+        type: String
     },
     age: {
-        type: Date,
+        type: Number,
         min: 18
     },
-    
-},
-{
-    timestamps:true
-});
 
-const User=mongoose.model("User",userSchema);
-module.exports=User;
+},
+    {
+        timestamps: true
+    });
+
+const User = mongoose.model("User", userSchema);
+module.exports = User;
 
