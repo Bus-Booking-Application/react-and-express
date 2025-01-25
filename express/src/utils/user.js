@@ -1,11 +1,11 @@
 const password=()=>
-{
-    let chargene="mnnbvcxzlkjhgfdsapoiuytrewq1234567890"
-    let password=""
-    for(i=0;i<8;i++)
     {
-       password=+character.charAt(Math.floor(Math.random()*chargene.length))
+        let chargene="mnnbvcxzlkjhgfdsapoiuytrewq1234567890"
+        let password=""
+        for(i=0;i<8;i++)
+        {
+           password=+character.charAt(Math.floor(Math.random()*chargene.length))
+        }
+        return password
     }
-    return password
-}
-module.exports=password
+    module.exports=password
