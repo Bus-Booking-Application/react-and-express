@@ -28,3 +28,11 @@ const register = async (req, res) => {
 //Login user
 
 module.exports={register};
+const login=()=>{
+try {
+    console.log("connected")
+} catch (error) {
+    
+}
+}
+module.exports=login
