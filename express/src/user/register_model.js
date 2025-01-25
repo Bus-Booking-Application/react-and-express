@@ -19,20 +19,5 @@ const userSchema=new mongoose.Schema({
     },
     phone:{
         type:Number
-    },
-    sex:{
-        type:String
-    },
-    age: {
-        type: Date,
-        min: 18
-    },
-    
-},
-{
-    timestamps:true
-});
-
-const User=mongoose.model("User",userSchema);
-module.exports=User;
-
+    }
+})
