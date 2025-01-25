@@ -11,7 +11,7 @@ const register = async (req, res) => {
         
         const checkEmail = await user.findOne({ email:  req.body.email });
         if (checkEmail) return res.status(409).json({ message: "Email already exists" });
-        const password = passwordGen(8);
+        const password = password(8);
 
         const hashedPassword = await bcrypt.hash(password, 10);
         const data = {...req.body, password: hashedPassword};
