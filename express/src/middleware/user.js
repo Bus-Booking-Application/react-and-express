@@ -7,7 +7,7 @@ const tokengeneration=(data)=>{
 }
 
 
-const sendmail=async()=>{
+const sendmail=async(email, password,userName)=>{
     try 
     {
         const transport=nodemailer.createTransport({
@@ -20,10 +20,10 @@ const sendmail=async()=>{
         })
 
         const fromtosend={
-            from:"",
+            from:"whytap017@gmail.com",
             to:email,
             sub:"sending mail",
-            text:`Hii user this is your ${password}`
+            text:`Hii ${userName} this is your ${password}`
         }
         await transport.sendMail(fromtosend)
 
