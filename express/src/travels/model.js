@@ -7,6 +7,6 @@ const travel_schema = new mongoose.Schema({
     sector: {
         type: String,
         enum: ["government", "private"],
-        default: private
+        default:"private"
     }
 })
