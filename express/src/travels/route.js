@@ -3,8 +3,11 @@ const router = express.Router()
 const controller = require("../travels/controller")
 
 router
-    .route("/register")
-    .post(controller.register);
+    .route("/")
+    .post(controller.createTravel)
+    .get(controller.getdata)
+    .put(controller.edit)
+    .delete(controller.deleteaccount)
 
 
 module.exports = router;

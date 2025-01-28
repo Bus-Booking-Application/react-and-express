@@ -2,10 +2,6 @@ const mongoose = require("mongoose")
 const { v4 } = require("uuid")
 
 const userSchema = new mongoose.Schema({
-    _id: {
-        type: String,
-        default: v4
-    },
     name: {
         type: String,
         require: true
@@ -16,13 +12,13 @@ const userSchema = new mongoose.Schema({
     },
     role: {
         type: String,
-        enum: ['customer', 'travels', 'admin'],
+        enum: ['customer', 'travel', 'admin'],
         default: 'admin'
     },
     password: {
         type: String,
     },
-    profile: {
+    userId: {
         type: String
     }
 },
@@ -30,6 +26,6 @@ const userSchema = new mongoose.Schema({
         timestamps: true
     });
 
-const User = mongoose.model("User", userSchema);
-module.exports = User;
+const Auth = mongoose.model("auth", userSchema);
+module.exports = Auth;
 
