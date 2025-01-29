@@ -6,6 +6,10 @@ const admin_schema=new mongoose.Schema({
         require:true
     },
     email:{
-
+        type:String,
+        require:true
     },
+    password:{
+        
+    }
 })

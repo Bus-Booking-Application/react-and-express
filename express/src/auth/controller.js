@@ -1,6 +1,6 @@
 const bcrypt = require("bcrypt");
 const Auth = require("./model");
-const {tokengeneration} = require("../middleware/user");
+const {tokengeneration} = require("../middleware/token");
 
 
 

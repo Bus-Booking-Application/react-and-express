@@ -8,25 +8,25 @@ const auth = require("../auth/model");
 
 const createTravel = async (req, res) => {
     try {
-        let data = req.body;
+
         let checkmail = await travel.findOne({ email: req.body.email });
         if (checkmail) return res.json({ message: "email already exis:t" });
         const [hashedPassword, generateId] = await Promise.all([
-            bcrypt.hash(data.password, 10),
+            bcrypt.hash(req.body.password, 10),
             v4()
         ]);
-        data = {
-            ...data,
+        let data = {
+            ...req.body,
             _id: generateId,
             role: "travel",
-            Password: hashedPassword
+            password: hashedPassword
         };
 
         let authData = {
-            name: data.CompanyName,
-            email: data.email,
-            role: data.role,
-            Password: hashedPassword,
+            name: req.body.CompanyName,
+            email: req.body.email,
+            role: req.body.role,
+            password: hashedPassword,
             userId: generateId,
             role: "travel",
 
@@ -35,7 +35,6 @@ const createTravel = async (req, res) => {
             travel.create(data),
             Auth.create(authData)
         ]);
-        console.log(create_data);
 
         res.json(create_data)
     } catch (error) {
@@ -60,9 +59,9 @@ const edit = async (req, res) => {
     try {
         let { email } = req.query
         let new_data = req.body
-        let checkmail = await travel.findOne((email))
+        let checkmail = await travel.findOne({ email })
         if (!checkmail) return res.status(404).json({ message: "data not found" });
-        let new_table = await travel.findOneAndUpdate(email, new_data, { new: true })
+        let new_table = await travel.findOneAndUpdate({ email }, { $set: new_data }, { new: true })
         res.json(new_table)
     } catch (error) {
         res.status(500).json({ message: error.message })
@@ -71,12 +70,12 @@ const edit = async (req, res) => {
 const deleteaccount = async (req, res) => {
     try {
         let { email } = req.query;
-        let checkmail = await travel.findOne((email))
+        let checkmail = await travel.findOne({email})
         if (!checkmail) return res.status(404).json({ message: "data not found" })
         let deleteDocument = await travel.findOneAndDelete(email)
         res.json("data deleted successfully.....")
     } catch (error) {
-        res.json({message:error.message})
+        res.json({ message: error.message })
     }
 }
 module.exports = { createTravel, getdata, edit, deleteaccount }
