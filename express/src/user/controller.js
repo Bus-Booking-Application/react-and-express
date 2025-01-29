@@ -1,4 +1,3 @@
-const User=require("../bus_offer/model")
 
 const postting=async(req,res)=>{
     try 
