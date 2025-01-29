@@ -1,6 +1,9 @@
 const express=require("express")
 const router=express.Router()
 const controller=require("../user/controller")
+const {verfytoken}=require("../middleware/token")
+
+router.use(verfytoken)
 
 router
 .route("/")
