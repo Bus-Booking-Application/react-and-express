@@ -1,20 +1,14 @@
 const express=require("express")
 const router=express.Router()
-const controller=require("./controller")
+const controller=require("../user/controller")
 
-// router
-// .route("/post")
-// .post(controller.postting)
+router
+.route("/")
+.post(controller.postting)
+.get(controller.getting)
+.put(controller.update)
+.delete(controller.deleting)
 
-// router
-// .route("/get")
-// .get(controller.getting)
+module.exports=router
 
-// router
-// .route("/update")
-// .put(controller.update)
-
-// router
-// .route("/delete")
-// .delete(controller.deleting)
 

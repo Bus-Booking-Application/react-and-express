@@ -2,7 +2,8 @@ const express = require("express");
 const router = express.Router();
 
 const travel = require("../travels/route");
-const userRoute = require("../auth/route");
+const auth = require("../auth/route");
+const user=require("../user/route")
 
 
 const route = [
@@ -11,8 +12,12 @@ const route = [
         path: "/travel"
     },
     {
-        route: userRoute,
-        path: "/user"
+        route: auth,
+        path: "/auth"
+    },
+    {
+        route:user,
+        path:"/user"
     }
 ];
 
