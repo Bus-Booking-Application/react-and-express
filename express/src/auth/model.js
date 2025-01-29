@@ -1,5 +1,4 @@
 const mongoose = require("mongoose")
-const { v4 } = require("uuid")
 
 const userSchema = new mongoose.Schema({
     name: {
@@ -12,7 +11,7 @@ const userSchema = new mongoose.Schema({
     },
     role: {
         type: String,
-        enum: ['customer', 'travel', 'admin'],
+        enum: ['superAdmin', 'travel', 'admin'],
         default: 'admin'
     },
     password: {

@@ -2,6 +2,8 @@ const travel = require("../travels/model");
 const Auth = require("../auth/model");
 const bcrypt = require("bcrypt");
 const { v4 } = require("uuid");
+const auth = require("../auth/model");
+
 
 
 const createTravel = async (req, res) => {
@@ -33,18 +35,48 @@ const createTravel = async (req, res) => {
             travel.create(data),
             Auth.create(authData)
         ]);
+        console.log(create_data);
+
         res.json(create_data)
     } catch (error) {
         res.status(500).json({ Error: error.message })
     }
 }
-const getdata = () => {
-
+const getdata = async (req, res) => {
+    try {
+        let data = req.body
+        let [checkmail, check_password] = await Promise.all([
+            auth.findOne({ email: data.email }),
+            bcrypt.compare(data.password, checkmail.password)
+        ])
+        if (!checkmail) return res.status(404).json({ messange: "data not found" })
+        if (!check_password) return res.status(401).json({ message: "wrong password" })
+        res.json(checkmail)
+    } catch (error) {
+        res.json({ message: error.message })
+    }
 }
-const edit = () => {
-
+const edit = async (req, res) => {
+    try {
+        let { email } = req.query
+        let new_data = req.body
+        let checkmail = await travel.findOne((email))
+        if (!checkmail) return res.status(404).json({ message: "data not found" });
+        let new_table = await travel.findOneAndUpdate(email, new_data, { new: true })
+        res.json(new_table)
+    } catch (error) {
+        res.status(500).json({ message: error.message })
+    }
 }
-const deleteaccount = () => {
-
+const deleteaccount = async (req, res) => {
+    try {
+        let { email } = req.query;
+        let checkmail = await travel.findOne((email))
+        if (!checkmail) return res.status(404).json({ message: "data not found" })
+        let deleteDocument = await travel.findOneAndDelete(email)
+        res.json("data deleted successfully.....")
+    } catch (error) {
+        res.json({message:error.message})
+    }
 }
 module.exports = { createTravel, getdata, edit, deleteaccount }

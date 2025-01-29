@@ -6,33 +6,4 @@ const tokengeneration=(data)=>{
         return jwt.sign({data},character,{expiresIn:'2d'})
 }
 
-
-const sendmail=async(email, password,userName)=>{
-    try 
-    {
-        const transport=nodemailer.createTransport({
-            service:"gmail",
-            auth:
-            {
-                user:"whytap017@gmail.com",
-                pass:"szbj grou gcar vrbl"
-            }
-        })
-
-        const fromtosend={
-            from:"whytap017@gmail.com",
-            to:email,
-            sub:"sending mail",
-            text:`Hii ${userName} this is your ${password}`
-        }
-        await transport.sendMail(fromtosend)
-
-       
-    } catch (error) {
-        
-    }
-}
-
-
-
-module.exports={tokengeneration,sendmail}
+module.exports={tokengeneration}
