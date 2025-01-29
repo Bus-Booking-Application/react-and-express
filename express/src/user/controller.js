@@ -1,53 +1,57 @@
-const bcrypt = require("bcrypt");
-const user = require("./register_model");
-const password = require("../utils/user");
-const nodemailer = require("nodemailer");
-const tokengeneration = require("../middleware/user");
+const User=require("../bus_offer/model")
 
-
-//Register user and send email to user with password  
-const register = async (req, res) => {
-    try {
-
-        const checkEmail = await user.findOne({ email: req.body.email });
-        if (checkEmail) return res.status(409).json({ message: "Email already exists" });
-        const Password = password(8);
-        const password = password(8);
-
-        const hashedPassword = await bcrypt.hash(Password, 10);
-        const data = { ...req.body, password: hashedPassword };
-
-        const createUser = await user.create(data);
-        await sendMailtoUser(req.body.email, password, req.body.userName);
-        res.json(createUser);
-    }
-
-    catch (error) {
-        res.status(500).json({ Error: error.message });
-    }
-};
-
-//Login user and generate token for user 
-const login = async (req, res) => {
-    try {
-        const { email, password } = req.body;
-        const checkEmail = await user.findOne({ email });
-        console.log(checkEmail);
-
-        if (!checkEmail) return res.status(409).json({ message: "Email not Registered.." });
-        const checkPassword = await bcrypt.compare(password, checkEmail.password);
-        if (!checkPassword) return res.status(409).json({ message: "Invalid Password" });
-        const token = generateToken(checkEmail);
-        res.json({
-            token: token,
-            message: "Login successful"
-        });
-    } catch (error) {
-        console.log(error);
-
-        res.json({ Error: error.message });
+const postting=async(req,res)=>{
+    try 
+    {
+        const data=req.body
+        const details=await User.create(data)
+        res.json(details)
+    } 
+    catch (error) 
+    {
+        res.json({Error:error.message})
     }
 }
 
+const getting=async(req,res)=>{
+    try 
+    {
+       const {email}=req.body 
+       const details=await User.find({email})
+       res.json(details)
+    } 
+    catch (error) 
+    {
+        res.json({Error:error.message})
+    }
+}
 
-module.exports = { login, register }
+const update=async(req,res)=>{
+    try 
+    {
+        const{email}=req.body
+        const details=await User.findOneAndUpdate({email},{ new: true })
+        if(!details)return res.status(404).json({message:"data is not found"})  
+        res.json(details) 
+    } 
+    catch (error) 
+    {
+        res.json({Error:error.message})
+    }
+}
+
+const deleting=async(req,res)=>{
+    try 
+    {
+        const {email}=req.body
+        const details=await User.findOneAndDelete({email})
+        if(!details)return res.status(404).json({message:"data is not found"})
+        res.json(details)
+    } 
+    catch (error) 
+    {
+        res.json({Error:error.message})
+    }
+}
+
+module.exports={postting,getting,update,deleting}
