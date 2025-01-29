@@ -27,13 +27,12 @@ const createTravel = async (req, res) => {
             role: req.body.role,
             password: hashedPassword,
             userId: generateId,
-            role: "travel",
-
-        };
+            role: "travel"
+        }
         let [create_data] = await Promise.all([
             travel.create(data),
             auth.create(authData)
-        ]);
+        ])
 
         res.json(create_data)
     } catch (error) {
