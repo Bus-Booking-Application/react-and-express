@@ -1,5 +1,4 @@
 const travel = require("../travels/model");
-const Auth = require("../auth/model");
 const bcrypt = require("bcrypt");
 const { v4 } = require("uuid");
 const auth = require("../auth/model");
@@ -33,7 +32,7 @@ const createTravel = async (req, res) => {
         };
         let [create_data] = await Promise.all([
             travel.create(data),
-            Auth.create(authData)
+            auth.create(authData)
         ]);
 
         res.json(create_data)
@@ -70,9 +69,11 @@ const edit = async (req, res) => {
 const deleteaccount = async (req, res) => {
     try {
         let { email } = req.query;
-        let checkmail = await travel.findOne({email})
+        let checkmail = await travel.findOne({ email })
         if (!checkmail) return res.status(404).json({ message: "data not found" })
-        let deleteDocument = await travel.findOneAndDelete(email)
+        let [deleteDocument_travel,deleteDocument_auth] = await Promise.all([
+            travel.findOneAndDelete(email),
+            auth.findOneAndDelete(email)])
         res.json("data deleted successfully.....")
     } catch (error) {
         res.json({ message: error.message })
