@@ -9,7 +9,7 @@ const createTravel = async (req, res) => {
     try {
 
         let checkmail = await travel.findOne({ email: req.body.email });
-        if (checkmail) return res.json({ message: "email already exis:t" });
+        if (checkmail) return res.status(409).json({ message: "email already exis:t" });
         const [hashedPassword, generateId] = await Promise.all([
             bcrypt.hash(req.body.password, 10),
             v4()

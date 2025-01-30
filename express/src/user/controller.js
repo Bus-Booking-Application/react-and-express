@@ -9,7 +9,7 @@ const postting=async(req,res)=>{
         const mailchecking=await User.findOne({ email: req.body.email })
         if(!mailchecking) return res.status(404).json({message:"data is found"})
         const[hashedPassword,generateId]=await Promise.all([bcrypt.hash(req.body.password,10),v4()])
-        let information = {
+        let user_information = {
             ...req.body,
             _id:generateId,
             password:hashedPassword,
@@ -18,13 +18,11 @@ const postting=async(req,res)=>{
         let authData={
             name: req.body.CompanyName,
             email: req.body.email,
-            role: req.body.role,
             password: hashedPassword,
-            userId: generateId,
-            role: "travel"
+            userId: generateId
         }
         let [createdata]=await Promise.all([
-            User.create(information),
+            User.create(user_information),
             auth.create(authData)
         ])
         res.json(createdata)

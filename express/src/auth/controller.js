@@ -9,8 +9,6 @@ const login = async (req, res) => {
     try {
         const { email, password } = req.body;
         const checkEmail = await Auth.findOne({ email });
-        console.log(checkEmail);
-
         if (!checkEmail) return res.status(409).json({ message: "Email not Registered.." });
         const checkPassword = await bcrypt.compare(password, checkEmail.password);
         if (!checkPassword) return res.status(409).json({ message: "Invalid Password" });
@@ -20,8 +18,6 @@ const login = async (req, res) => {
             message: "Login successful"
         });
     } catch (error) {
-        console.log(error);
-
         res.status(500).json({ Error: error.message });
     }
 }
