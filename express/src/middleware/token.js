@@ -17,7 +17,7 @@ const verfytoken = async (req, res, next) => {
                 req.user = checkUser;
                 next();
         } catch (error) {
-                res.json({ message: error.message })
+                res.status(500).json({ message: error.message })
         }
 }
 module.exports = { tokengeneration, verfytoken }
