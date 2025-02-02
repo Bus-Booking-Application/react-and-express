@@ -1,5 +1,5 @@
-import axios from "axios";
 import React, { useState } from "react"
+import axios from "axios";
 
 const Register = () => {
     const form = {
@@ -31,6 +31,7 @@ const Register = () => {
             console.log(error);
 
         }
+        
     }
 
 
@@ -82,6 +83,13 @@ const Register = () => {
                                     onChange={handlechange}
                                     name="to"
                                     placeholder="Enter a to"
+                                    className="border border-red-500 outline-none p-2 rounded"
+                                />
+                                <input type="text"
+                                    value={data.sector}
+                                    onChange={handlechange}
+                                    name="sector"
+                                    placeholder="Enter a sector"
                                     className="border border-red-500 outline-none p-2 rounded"
                                 />
 
