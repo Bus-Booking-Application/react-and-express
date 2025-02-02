@@ -1,14 +1,15 @@
 import React from 'react';
 import Login from './components/Login';
+import Create from "./components/Create";
 
 
 
 
 
-function App (){
-  return(
+function App() {
+  return (
     <div>
-       <Login/>
+      <Create />
     </div>
   )
 }
