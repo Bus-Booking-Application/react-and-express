@@ -3,7 +3,7 @@ const router = express.Router()
 const controller = require("../travels/controller")
 const {verfytoken}=require("../middleware/token")
 
-router.use(verfytoken)
+
 
 router
     .route("/")

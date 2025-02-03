@@ -3,11 +3,14 @@ const connection = require("./config/connection");
 const route = require("./route/routeIndex");
 const logger = require("./config/logger");
 const { successHandler, errorHandler } = require("./config/morgan");
+const cors=require('cors')
 
 const app = express();
 
 // Initialize Database Connection
 connection();
+
+app.use(cors("*"))
 
 app.use(express.json());
 
