@@ -1,6 +1,6 @@
 import React from 'react';
-import Login from './components/Login';
-import Create from "./components/Create";
+import Sidebar from "../src/admin/components/Sidebar"
+import Direction from './admin/components/Routes';
 
 
 
@@ -8,9 +8,10 @@ import Create from "./components/Create";
 
 function App() {
   return (
-    <div>
-      <Create />
-    </div>
+    <>
+     <Direction/>
+    </>
+
   )
 }
 
