@@ -23,7 +23,7 @@ const BookingDetails = () => {
         onClick={handleConfirmBooking}
         className="bg-green-600 text-white px-6 py-3 rounded"
       >
-        Confirm Booking
+        Confirm Bookings
       </button>
     </div>
   );
