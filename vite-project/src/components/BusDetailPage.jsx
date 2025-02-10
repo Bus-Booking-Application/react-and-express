@@ -1,7 +1,12 @@
 import React from 'react';
 import { assets } from '../assets/assets';
+import { useNavigate } from 'react-router-dom';
 
 function BusBooking() {
+  const navigate=useNavigate()
+  const click=()=>{
+    navigate("/seat")
+  }
   return (
     <div className="flex flex-col min-h-screen">
       
@@ -83,7 +88,7 @@ function BusBooking() {
                     <p className="text-sm text-gray-500">Starting From</p>
                     <p className="font-medium text-[#ff6b00]">₹599</p>
                   </div>
-                  <button className="bg-[#ff6b00] text-white px-4 py-2 rounded hover:bg-[#ff6b00]/90 cursor-pointer">Select Seats</button>
+                  <button  onClick={click}className="bg-[#ff6b00] text-white px-4 py-2 rounded hover:bg-[#ff6b00]/90 cursor-pointer">Select Seats</button>
                 </div>
               </div>
             ))}

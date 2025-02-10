@@ -26,7 +26,7 @@ const SeatSelection = () => {
     setSeaterSeats(selectedSeaterSeats);
     setSleeperSeats(selectedSleeperSeats);
 
-    navigate('/booking-details', {
+    navigate('/bookseating', {
       state: {
         name,
         seaterSeats: selectedSeaterSeats,
