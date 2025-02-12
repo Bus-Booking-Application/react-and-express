@@ -14,7 +14,7 @@ const Login = () => {
   const [age , setAge] = useState('')
 
   return (
-    <form  className='min-h-[80vh] flex items-center'>
+    <form  className='min-h-[80vh] flex items-center p-50'>
       <div className='flex flex-col gap-3 m-auto items-start p-8 min-w-[340px] sm:min-w-96 border rounded-xl text-[#5E5E5E] text-sm shadow-lg'>
         <p className='text-2xl font-semibold'>{state === 'Sign Up' ? 'Create Account' : 'Login'}</p>
         <p>Please {state === 'Sign Up' ? 'sign up' : 'log in'} to book appointment</p>
