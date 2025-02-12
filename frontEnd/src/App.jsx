@@ -1,16 +1,18 @@
 
 //Admin src/App.jsx
-import ThemeProvider from "./components/ThemeProvider";
-import AdminDashboard from "./views/AdminDashboard";
-import RegisterAgent from "./views/RegisterAgent";
-import AgentDetails from "./views/AgentDetails";
-import Logout from "./views/Logout";
-import Sidebar from "./components/Sidebar";
+import ThemeProvider from "./components/AdminComponents/ThemeProvider";
+import AdminDashboard from "./views/Admin/AdminDashboard";
+import RegisterAgent from "./views/Admin/RegisterAgent";
+import AgentDetails from "./views/Admin/AgentDetails";
+import Logout from "./views/Admin/Logout";
+import Sidebar from "./components/AdminComponents/Sidebar";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import Header from "./components/NewTheme";
 
 function App() {
   return (
     <ThemeProvider>
+      {/* <Header> */}
       <Router>
         <div className="flex min-h-screen">
           <Sidebar />
@@ -23,7 +25,9 @@ function App() {
             </Routes>
           </main>
         </div>
+
       </Router>
+      {/* </Header> */}
     </ThemeProvider>
   );
 }

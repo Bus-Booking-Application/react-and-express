@@ -1,39 +1,37 @@
-//src/views/AgentDetails.jsx
-import { useState } from "react";
-import { Button } from "../components/ui/Button";
-import { getAgents, updateAgent, deleteAgent } from "../controllers/AgentController";
+// src/views/CustomerDetails.jsx
+import { getCustomers, updateCustomer, deleteCustomer } from "../../controllers/CustomerController";
+import { Button } from "../../components/ui/Button";
+import { useState } from 'react';
 
-export default function AgentDetails() {
-  const [agents, setAgents] = useState(getAgents());
-
-  const updateAgentDetails = (index, updatedCompanyName) => {
-    const updatedAgent = { ...agents[index], companyName: updatedCompanyName };
-    updateAgent(index, updatedAgent);
-    setAgents(getAgents());
-  };
+export default function CustomerDetails() {
+  const [customers, setCustomers] = useState(getCustomers());
 
   const handleEdit = (index) => {
-    const currentAgent = agents[index];
-    const updatedCompanyName = prompt("Enter new company name", currentAgent.companyName);
-    if (updatedCompanyName) {
-      updateAgentDetails(index, updatedCompanyName);
+    const updatedName = prompt("Enter new customer name", customers[index].name);
+    if (updatedName) {
+      const updatedCustomer = { ...customers[index], name: updatedName };
+      updateCustomer(index, updatedCustomer);
+      setCustomers([...getCustomers()]);
     }
   };
 
   const handleDelete = (index) => {
-    deleteAgent(index);
-    setAgents(getAgents());
+    deleteCustomer(index);
+    setCustomers([...getCustomers()]);
   };
 
   return (
     <div className="p-4">
-      <h2 className="text-xl font-bold mb-4">Agent Details</h2>
-      {agents.map((agent, index) => (
+      <h2 className="text-xl font-bold mb-4">Customer Details</h2>
+      {customers.map((customer, index) => (
         <div key={index} className="border p-4 rounded mb-4">
-          <p><strong>Company Name:</strong> {agent.companyName}</p>
-          <p><strong>Email:</strong> {agent.email}</p>
-          <p><strong>Sector:</strong> {agent.sector}</p>
+          <p><strong>Ticket Number:</strong> {customer.ticketNumber}</p>
+          <p><strong>Name:</strong> {customer.name}</p>
+          <p><strong>Email:</strong> {customer.email}</p>
+          <p><strong>Mobile:</strong> {customer.mobileNumber}</p>
           <div className="flex space-x-2 mt-2">
+            <Button onClick={() => handleEdit(index)}>Edit</Button>
+            <Button variant="outline" onClick={() => handleDelete(index)}>Delete</Button>
             <div>
             <Button type="Edit" onClick={() => handleEdit(index)}>Edit</Button>
             <Button type="Delete" variant="outline" onClick={() => handleDelete(index)}>Delete</Button>
@@ -50,7 +48,7 @@ export default function AgentDetails() {
                   >
                     Delete
                   </button>
-              </div>            
+              </div> 
           </div>
         </div>
       ))}

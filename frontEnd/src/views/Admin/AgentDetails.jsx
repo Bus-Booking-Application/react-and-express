@@ -1,37 +1,39 @@
-// src/views/CustomerDetails.jsx
-import { getCustomers, updateCustomer, deleteCustomer } from "../controllers/CustomerController";
-import { Button } from "../components/ui/Button";
-import { useState } from 'react';
+//src/views/AgentDetails.jsx
+import { useState } from "react";
+import { Button } from "../../components/ui/Button";
+import { getAgents, updateAgent, deleteAgent } from "../../controllers/AgentController";
 
-export default function CustomerDetails() {
-  const [customers, setCustomers] = useState(getCustomers());
+export default function AgentDetails() {
+  const [agents, setAgents] = useState(getAgents());
+
+  const updateAgentDetails = (index, updatedCompanyName) => {
+    const updatedAgent = { ...agents[index], companyName: updatedCompanyName };
+    updateAgent(index, updatedAgent);
+    setAgents(getAgents());
+  };
 
   const handleEdit = (index) => {
-    const updatedName = prompt("Enter new customer name", customers[index].name);
-    if (updatedName) {
-      const updatedCustomer = { ...customers[index], name: updatedName };
-      updateCustomer(index, updatedCustomer);
-      setCustomers([...getCustomers()]);
+    const currentAgent = agents[index];
+    const updatedCompanyName = prompt("Enter new company name", currentAgent.companyName);
+    if (updatedCompanyName) {
+      updateAgentDetails(index, updatedCompanyName);
     }
   };
 
   const handleDelete = (index) => {
-    deleteCustomer(index);
-    setCustomers([...getCustomers()]);
+    deleteAgent(index);
+    setAgents(getAgents());
   };
 
   return (
     <div className="p-4">
-      <h2 className="text-xl font-bold mb-4">Customer Details</h2>
-      {customers.map((customer, index) => (
+      <h2 className="text-xl font-bold mb-4">Agent Details</h2>
+      {agents.map((agent, index) => (
         <div key={index} className="border p-4 rounded mb-4">
-          <p><strong>Ticket Number:</strong> {customer.ticketNumber}</p>
-          <p><strong>Name:</strong> {customer.name}</p>
-          <p><strong>Email:</strong> {customer.email}</p>
-          <p><strong>Mobile:</strong> {customer.mobileNumber}</p>
+          <p><strong>Company Name:</strong> {agent.companyName}</p>
+          <p><strong>Email:</strong> {agent.email}</p>
+          <p><strong>Sector:</strong> {agent.sector}</p>
           <div className="flex space-x-2 mt-2">
-            <Button onClick={() => handleEdit(index)}>Edit</Button>
-            <Button variant="outline" onClick={() => handleDelete(index)}>Delete</Button>
             <div>
             <Button type="Edit" onClick={() => handleEdit(index)}>Edit</Button>
             <Button type="Delete" variant="outline" onClick={() => handleDelete(index)}>Delete</Button>
@@ -48,7 +50,7 @@ export default function CustomerDetails() {
                   >
                     Delete
                   </button>
-              </div> 
+              </div>            
           </div>
         </div>
       ))}

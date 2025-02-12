@@ -1,8 +1,8 @@
 // src/views/RegisterCustomer.jsx
 import { useState } from "react";
-import { Button } from "../components/ui/Button";
-import { Input } from "../components/ui/Input";
-import { registerCustomer } from "../controllers/CustomerController";
+import { Button } from "../../components/ui/Button";
+import { Input } from "../../components/ui/Input";
+import { registerCustomer } from "../../controllers/CustomerController";
 
 export default function RegisterCustomer() {
   const [formData, setFormData] = useState({

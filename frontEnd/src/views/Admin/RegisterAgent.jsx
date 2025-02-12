@@ -1,8 +1,8 @@
 //Admin src/views/RegisterAgent.jsx
 import { useState } from "react";
-import { Button } from "../components/ui/Button";
-import { Input } from "../components/ui/Input";
-import { registerAgent } from "../controllers/AgentController";
+import { Button } from "../../components/ui/Button";
+import { Input } from "../../components/ui/Input";
+import { registerAgent } from "../../controllers/AgentController";
 
 export default function RegisterAgent() {
   const [formData, setFormData] = useState({
